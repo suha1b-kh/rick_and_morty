@@ -13,8 +13,7 @@ class CharactersRepository {
 
     characters.map((character) => Character.fromJson(character)).toList();
 
-    // log('ASDASD');
-    // log(characters.toString());
+    log(characters.toString());
     return characters
         .map((character) => Character.fromJson(character))
         .toList();

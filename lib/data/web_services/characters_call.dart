@@ -1,14 +1,13 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart' as http;
-import 'package:rick_and_morty/constants/strings.dart';
 
 class CharactersWebServices {
   Future<List<dynamic>> getAllCharacters() async {
     try {
       final response = await http
           .get(Uri.parse('https://rickandmortyapi.com/api/character'));
-      print('Response status code: ${response.statusCode}');
+      log('Response status code: ${response.statusCode}');
       // print('Response body: ${response.body}');
       //  log(characters[0]);
       if (response.statusCode == 200) {
