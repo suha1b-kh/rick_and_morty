@@ -15,10 +15,10 @@ class RickAndMorty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: allCharactersScreen,
-      onGenerateRoute: AppRouter.generateRoute,
+      onGenerateRoute: appRouter.generateRoute,
     );
   }
 
