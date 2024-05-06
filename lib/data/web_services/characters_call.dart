@@ -5,16 +5,16 @@ import 'package:http/http.dart' as http;
 class CharactersWebServices {
   Future<List<dynamic>> getAllCharacters() async {
     try {
-      final response = await http
-          .get(Uri.parse('https://rickandmortyapi.com/api/character'));
+      final response = await http.get(Uri.parse(
+          'https://raw.githubusercontent.com/suha1b-kh/prototype-users/main/users.json'));
       log('Response status code: ${response.statusCode}');
       // print('Response body: ${response.body}');
       //  log(characters[0]);
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
-        if (jsonData['results'] != null) {
+        if (jsonData['users'] != null) {
           log('success');
-          return jsonData['results'];
+          return jsonData['users'];
         } else {
           log('DDDDDDDDDDDDDD');
           throw Exception('No character data found');
@@ -25,7 +25,7 @@ class CharactersWebServices {
       }
     } catch (e) {
       log('AAAAAAAAAAAAAAAAAAA');
-      print('Error: $e');
+      log('Error: $e');
       return [];
     }
   }

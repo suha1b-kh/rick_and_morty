@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/data/models/characters.dart';
+
+import 'package:rick_and_morty/presentation/screens/characters_screen.dart';
 import 'package:rick_and_morty/presentation/widgets/character_item.dart';
 
-Widget buildCharactersList(List<Character> characters) {
+Widget buildCharactersList() {
   return GridView.builder(
     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: 2,
-      childAspectRatio: 2 / 3,
+      crossAxisCount: 1,
+      childAspectRatio: 2.5,
       crossAxisSpacing: 1,
       mainAxisSpacing: 1,
     ),
     shrinkWrap: true,
     physics: const ClampingScrollPhysics(),
     padding: EdgeInsets.zero,
-    itemCount: characters.length,
+    itemCount: searchTextController.text.isEmpty
+        ? allCharacters.length
+        : searchedForCharacters.length,
     itemBuilder: (ctx, index) {
-      return CharacterItem(character: characters[index]);
+      return CharacterItem(
+        character: searchTextController.text.isEmpty
+            ? allCharacters[index]
+            : searchedForCharacters[index],
+      );
     },
   );
 }
