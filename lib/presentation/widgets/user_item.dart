@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/data/models/characters.dart';
+import 'package:rick_and_morty/data/models/users.dart';
 
-class CharacterItem extends StatelessWidget {
-  final Character character;
+class UserItem extends StatelessWidget {
+  final User user;
 
-  const CharacterItem({
-    Key? key,
-    required this.character,
-  }) : super(key: key);
+  const UserItem({
+    super.key,
+    required this.user,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class CharacterItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
       child: Container(
         decoration: BoxDecoration(
-          color: Color(0xFFF2F4F7),
+          color: const Color(0xFFF2F4F7),
           borderRadius: BorderRadius.circular(15),
         ),
         width: 335,
@@ -27,7 +27,7 @@ class CharacterItem extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 14),
                   child: CircleAvatar(
-                    backgroundImage: NetworkImage(character.image),
+                    backgroundImage: NetworkImage(user.image),
                   ),
                 ),
               ),
@@ -37,8 +37,8 @@ class CharacterItem extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      character.name,
-                      style: TextStyle(
+                      user.name,
+                      style: const TextStyle(
                         color: Color(0xFF1B2A57),
                         fontSize: 16,
                         fontFamily: 'Poppins',
@@ -46,10 +46,10 @@ class CharacterItem extends StatelessWidget {
                         height: 0,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Text(
+                    const Text(
                       'Case Information',
                       style: TextStyle(
                         color: Color(0xFF7CA0CA),
@@ -62,18 +62,18 @@ class CharacterItem extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
               Container(
                 width: 10,
                 height: 10,
-                decoration: ShapeDecoration(
+                decoration: const ShapeDecoration(
                   color: Color(0xFF11C72E),
                   shape: OvalBorder(),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 30,
               ),
               Image.asset('assets/images/arrow.png')

@@ -1,26 +1,23 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_offline/flutter_offline.dart';
-import 'package:rick_and_morty/business_logic/cubit/characters_cubit.dart';
+import 'package:rick_and_morty/business_logic/cubit/users_cubit.dart';
 import 'package:rick_and_morty/constants/colors.dart';
-import 'package:rick_and_morty/data/models/characters.dart';
-import 'package:rick_and_morty/presentation/widgets/character_list.dart';
-import 'package:rick_and_morty/presentation/widgets/loaded_list.dart';
+import 'package:rick_and_morty/data/models/users.dart';
+import 'package:rick_and_morty/presentation/widgets/user_list.dart';
 
-late List<Character> allCharacters;
-late List<Character> searchedForCharacters;
+late List<User> allUsers;
+late List<User> searchedForUsers;
 bool isSearching = false;
 final searchTextController = TextEditingController();
 
-class CharactersScreen extends StatefulWidget {
-  const CharactersScreen({super.key});
+class UsersScreen extends StatefulWidget {
+  const UsersScreen({super.key});
   @override
-  State<CharactersScreen> createState() => _CharactersScreenState();
+  State<UsersScreen> createState() => _UsersScreenState();
 }
 
-class _CharactersScreenState extends State<CharactersScreen> {
+class _UsersScreenState extends State<UsersScreen> {
   Widget buildSearchField() {
     return TextField(
       controller: searchTextController,
@@ -43,16 +40,15 @@ class _CharactersScreenState extends State<CharactersScreen> {
         fontWeight: FontWeight.w500,
         height: 0,
       ),
-      onChanged: (searchedCharacter) {
-        addSearchedForItemsToSearchedList(searchedCharacter);
+      onChanged: (searcheUsers) {
+        addSearchedForItemsToSearchedList(searcheUsers);
       },
     );
   }
 
-  void addSearchedForItemsToSearchedList(String searchedCharacter) {
-    searchedForCharacters = allCharacters
-        .where((character) =>
-            character.name.toLowerCase().startsWith(searchedCharacter))
+  void addSearchedForItemsToSearchedList(String searcheUsers) {
+    searchedForUsers = allUsers
+        .where((users) => users.name.toLowerCase().startsWith(searcheUsers))
         .toList();
     setState(() {});
   }
@@ -182,7 +178,7 @@ class _CharactersScreenState extends State<CharactersScreen> {
         color: myDark,
         child: Column(
           children: [
-            buildCharactersList(),
+            buildUsersList(),
           ],
         ),
       ),
@@ -195,7 +191,7 @@ class _CharactersScreenState extends State<CharactersScreen> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<CharactersCubit>(context).getAllCharacters();
+    BlocProvider.of<UsersCubit>(context).getAllUsers();
   }
 
   @override
@@ -226,10 +222,10 @@ class _CharactersScreenState extends State<CharactersScreen> {
   }
 
   Widget buildBlocWidget() {
-    return BlocBuilder<CharactersCubit, CharactersState>(
+    return BlocBuilder<UsersCubit, UsersState>(
       builder: (context, state) {
-        if (state is CharactersLoaded) {
-          allCharacters = (state).characters;
+        if (state is UsersLoaded) {
+          allUsers = (state).users;
           // log('state: $state');
           return buildLoadedListWidgets();
         } else {
